@@ -6,9 +6,9 @@ import json
 
 from twilio.rest import Client
 
-if not len(sys.argv) != 2:
+if len(sys.argv) != 4:
     print('Please provide the product number and how many stores to search.')
-    print('for example: homedepot.py 1001238260 10')
+    print('for example: homedepot.py 1000155721 10 +15555555555')
     sys.exit(1)
 
 ##set up home depot variables
@@ -22,11 +22,11 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 message_body = ''
 send_message = False
+send_to_phone_number = sys.argv[3]
 
 headers = {
         'Accept':'application/json'
         ,'user-agent':'PostmanRuntime/7.25.0'
-        ,'cookie':'hap=s2; GROUTEID=.1; GCLB=COLu1Jq115Kvaw; bm_sz=AD84B54B91E552BCBA8D55B3DAC3CE83~YAAQVUKWuAT7v0tyAQAALP4dkAhx5wKc2UhTsNrE/jbnxgUW40mNPwYqogl+fMpBMISfDvAUsb4jFgddeYWmvPmcWprnOXcP/ZlIxOP/Ta8vZr3h0fqXS7Em9L5YaHw1HAlBUKhOgxR60lSglauUCCX+s+Nmb9mzEZBwUXdi/DSMPh+L+JzlTSIBJVj1SzNFkxg=; _abck=A6651D12D400B766FEFFD36DDC627776~-1~YAAQVUKWuAX7v0tyAQAALP4dkASWbjVz4PWJ32Hy997sQGedkHvt3T3tAPcsWYDdfnaT2t3jQYuTF78mSWtmbmYdILBHbKxzxDWyX11rbKCXmmCVbhOggUdX88IhewkIki1wxh6Ld34/ZV8/hVvzImlV1LOPgWDsIirqAY6hqzbaOaWsVJ9aeSwLLXedDLB8/4TNyolqmJpkn18FQFnJVZYwPrj62WAyRs/dTU9DBdeP7JCD1blk9Au7EPXSjfPrCyxAYSXRAH2cBefmZ5a4S1fCS6eYRoMLq1UHt2ECYeGAQJGn01xGq7eDxZU=~-1~-1~-1; payopt=OP; ak_bmsc=06A0845FAED53AC3A0EFD49EF8737875B89642559D510000B956DD5E1582266B~pllBrItAj97/Wwd1/5PMCO3mNkJ5DI7GuNYyYstDAQWa+SH/qhSd+ww1+hxKmaO9IIaa/2yMucXbiVA59dVDLGJARTPZKlOHkuy97LA5ZECAKoxpx+O0nYfCVzeBZuEMDzvOjgShTM/sNC9isizQMq/As1xhOJy0Nhi6sVZobdhXwYIWVNArq+qLrnH5D+Tc8XQw64Gw13e1DkOLY/aL9IqhlBKrg8P+XO9ZNI+8qNyBQ='
         ,'accept':'*/*'
         ,'accept-encoding':'gzip,deflate,br'
         ,'connection':'keep-alive'
@@ -84,7 +84,7 @@ if send_message:
     message = client.messages.create(
                             body = message_header + message_body,
                             from_ = '+16477230044',
-                            to = '+19055994652'
+                            to = send_to_phone_number
                         )
 else:
     print('No stock available at any of the closest ' + total_stores_to_search + ' stores')
