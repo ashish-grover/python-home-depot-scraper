@@ -48,7 +48,7 @@ for product_number in product_numbers:
         data = json.loads(response_product.text)
         product_name = json.loads(response_product.text)['manufacturer']+ ' - ' + json.loads(response_product.text)['name']
 
-    message_header = 'Product being searched for: ' + product_name + '\n\n'
+    message_header = 'Product being searched for: ' + product_name + ' (' + json.loads(response_product.text)['modelNumber'] + ')\n\n'
     message_header += '=================================================== \n\n'
     print(message_header)
 
