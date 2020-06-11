@@ -15,7 +15,7 @@ product_numbers = [str(i) for i in (sys.argv[1]).split(',')]
 product_name = ''
 total_stores_to_search = sys.argv[2]
 
-##set up twilio variables
+##set up ms teams variables
 msteams_connector_url = os.environ['MICROSOFT_TEAMS_CONNECTOR_URL']
 message_body = ''
 send_message = False
